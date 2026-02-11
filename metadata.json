@@ -1,0 +1,7 @@
+{
+  "name": "Project Amore",
+  "description": "A bespoke digital Valentine's experience featuring a narrative scroll, memory scrapbook, and an interactive proposal with fluid animations.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
