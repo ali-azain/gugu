@@ -14,21 +14,21 @@ const FloatingHearts = () => {
         <motion.div
           key={i}
           className="absolute text-rose-200/40"
-          initial={{ 
-            x: Math.random() * 100 + '%', 
-            y: '110%', 
+          initial={{
+            x: Math.random() * 100 + '%',
+            y: '110%',
             scale: Math.random() * 0.5 + 0.5,
             rotate: Math.random() * 360
           }}
-          animate={{ 
+          animate={{
             y: '-10%',
             rotate: Math.random() * 360 + 360
           }}
-          transition={{ 
-            duration: Math.random() * 10 + 10, 
-            repeat: Infinity, 
+          transition={{
+            duration: Math.random() * 10 + 10,
+            repeat: Infinity,
             ease: "linear",
-            delay: Math.random() * 5 
+            delay: Math.random() * 5
           }}
         >
           <Heart fill="currentColor" size={Math.random() * 30 + 15} />
@@ -48,10 +48,10 @@ const ImageCard = ({ src, delay, caption }: { src: string, delay: number, captio
     className="bg-white p-3 pb-8 shadow-2xl border border-rose-100 rounded-sm transform transition-all duration-300 w-full max-w-sm"
   >
     <div className="overflow-hidden bg-rose-50 aspect-[3/4]">
-      <img 
-        src={src} 
-        alt="Memory" 
-        className="w-full h-full object-cover transition-all duration-500" 
+      <img
+        src={src}
+        alt="Memory"
+        className="w-full h-full object-cover transition-all duration-500"
         onError={(e) => {
           (e.target as HTMLImageElement).src = `https://placehold.co/600x800/fff1f2/e11d48?text=Add+${src}+Here`;
         }}
@@ -70,15 +70,15 @@ const CaptchaVerification = ({ onVerified }: { onVerified: () => void }) => {
   // In a real scenario, the user would provide 6 images of themselves (val1-val6) 
   // and we'd have 3 decoy images. For now, placeholders represent the "Valentine".
   const images = [
-    { id: 1, src: 'val1.jpg', isValentine: true },
-    { id: 2, src: 'val2.jpg', isValentine: true },
-    { id: 3, src: 'decoy1.jpg', isValentine: false },
-    { id: 4, src: 'val3.jpg', isValentine: true },
-    { id: 5, src: 'val4.jpg', isValentine: true },
-    { id: 6, src: 'decoy2.jpg', isValentine: false },
-    { id: 7, src: 'val5.jpg', isValentine: true },
-    { id: 8, src: 'decoy3.jpg', isValentine: false },
-    { id: 9, src: 'val6.jpg', isValentine: true },
+    { id: 1, src: '/images/val1.jpeg', isValentine: true },
+    { id: 2, src: '/images/val2.jpeg', isValentine: true },
+    { id: 3, src: '/images/decoy1.jpg', isValentine: false },
+    { id: 4, src: '/images/val3.jpeg', isValentine: true },
+    { id: 5, src: '/images/val4.jpeg', isValentine: true },
+    { id: 6, src: '/images/decoy2.jpg', isValentine: false },
+    { id: 7, src: '/images/val5.jpeg', isValentine: true },
+    { id: 8, src: '/images/decoy3.jpg', isValentine: false },
+    { id: 9, src: '/images/val6.jpeg', isValentine: true },
   ];
 
   const toggleSelect = (id: number) => {
@@ -92,8 +92,8 @@ const CaptchaVerification = ({ onVerified }: { onVerified: () => void }) => {
 
   const handleVerify = () => {
     const valIds = images.filter(img => img.isValentine).map(img => img.id);
-    const isCorrect = 
-      selected.length === valIds.length && 
+    const isCorrect =
+      selected.length === valIds.length &&
       selected.every(id => valIds.includes(id));
 
     if (isCorrect) {
@@ -105,7 +105,7 @@ const CaptchaVerification = ({ onVerified }: { onVerified: () => void }) => {
   };
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       className="bg-white border-2 border-[#E11D48] shadow-2xl w-[95%] max-w-[400px] overflow-hidden rounded-sm"
@@ -118,13 +118,13 @@ const CaptchaVerification = ({ onVerified }: { onVerified: () => void }) => {
 
       <div className="p-1 grid grid-cols-3 gap-1">
         {images.map((img) => (
-          <div 
+          <div
             key={img.id}
             onClick={() => toggleSelect(img.id)}
             className="relative aspect-square cursor-pointer group overflow-hidden bg-gray-100"
           >
-            <img 
-              src={img.src} 
+            <img
+              src={img.src}
               className={`w-full h-full object-cover transition-transform duration-300 ${selected.includes(img.id) ? 'scale-90' : 'group-hover:scale-105'}`}
               onError={(e) => {
                 const text = img.isValentine ? `Me ${img.id}` : "Not Me";
@@ -148,7 +148,7 @@ const CaptchaVerification = ({ onVerified }: { onVerified: () => void }) => {
           <Headphones size={20} className="hover:text-gray-600 cursor-pointer" />
           <Info size={20} className="hover:text-gray-600 cursor-pointer" />
         </div>
-        <button 
+        <button
           onClick={handleVerify}
           className="bg-[#E11D48] text-white px-6 py-2.5 text-sm font-bold uppercase tracking-wider rounded-sm hover:bg-rose-700 transition-colors shadow-sm active:scale-95"
         >
@@ -207,8 +207,8 @@ export default function App() {
   if (appState === 'loading') {
     return (
       <div className="h-screen w-full bg-rose-50 flex flex-col items-center justify-center space-y-6">
-        <motion.div 
-          animate={{ scale: [1, 1.2, 1] }} 
+        <motion.div
+          animate={{ scale: [1, 1.2, 1] }}
           transition={{ repeat: Infinity, duration: 1.5 }}
           className="text-rose-600"
         >
@@ -222,7 +222,7 @@ export default function App() {
   if (appState === 'gate') {
     return (
       <AnimatePresence>
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
@@ -235,7 +235,7 @@ export default function App() {
             className="z-10 space-y-12"
           >
             <div className="space-y-4">
-              <motion.div 
+              <motion.div
                 animate={{ rotate: [0, 10, -10, 0], scale: [1, 1.1, 1] }}
                 transition={{ repeat: Infinity, duration: 4 }}
                 className="inline-block text-rose-600 mb-4"
@@ -272,9 +272,9 @@ export default function App() {
             <h2 className="text-2xl font-bold text-rose-800 uppercase tracking-widest">Security Check</h2>
             <p className="text-rose-600 font-medium">Verify you're actually my valentine</p>
           </motion.div>
-          
+
           <CaptchaVerification onVerified={handleVerified} />
-          
+
           <p className="text-rose-300 text-xs italic">Hint: Select the 6 most handsome faces!</p>
         </div>
       </div>
@@ -286,7 +286,7 @@ export default function App() {
       <FloatingHearts />
 
       {/* Music Toggle */}
-      <button 
+      <button
         onClick={() => setIsMuted(!isMuted)}
         className="fixed bottom-8 right-8 z-50 p-5 bg-white/90 backdrop-blur-md rounded-full shadow-2xl text-rose-600 hover:bg-rose-100 transition-all border border-rose-100"
       >
@@ -295,7 +295,7 @@ export default function App() {
 
       {/* Main Content */}
       <div className="w-full max-w-6xl px-6 pt-32 pb-12 text-center space-y-32 z-10">
-        
+
         {/* Heartfelt Message */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -304,9 +304,9 @@ export default function App() {
           className="space-y-8"
         >
           <h2 className="text-6xl md:text-[10rem] font-bold text-rose-900 leading-none tracking-tight">
-            I love you <br/> so much
+            I love you <br /> so much
           </h2>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8 }}
@@ -318,19 +318,19 @@ export default function App() {
 
         {/* The Pictures Grid (The 3 Images of HER you uploaded) */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 px-4 justify-items-center">
-          <ImageCard 
-            src="image1.jpg" 
-            delay={0.2} 
+          <ImageCard
+            src="/images/image1.png"
+            delay={0.2}
             caption="Simply stunning"
           />
-          <ImageCard 
-            src="image2.jpg" 
-            delay={0.4} 
+          <ImageCard
+            src="/images/image2.jpg"
+            delay={0.4}
             caption="My favorite smile"
           />
-          <ImageCard 
-            src="image3.jpg" 
-            delay={0.6} 
+          <ImageCard
+            src="/images/image3.jpg"
+            delay={0.6}
             caption="Always beautiful"
           />
         </div>
@@ -339,7 +339,7 @@ export default function App() {
         <section className="py-32 relative min-h-[600px] flex items-center justify-center">
           <AnimatePresence mode="wait">
             {!proposalAccepted ? (
-              <motion.div 
+              <motion.div
                 key="question"
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -350,7 +350,7 @@ export default function App() {
                   <h2 className="text-6xl md:text-9xl font-bold text-rose-950 leading-tight relative z-10 drop-shadow-sm">
                     Will you be my Valentine?
                   </h2>
-                  <motion.div 
+                  <motion.div
                     animate={{ scale: [1, 1.3, 1], rotate: [0, 15, -15, 0] }}
                     transition={{ repeat: Infinity, duration: 5 }}
                     className="absolute -top-16 -right-16 text-rose-300 -z-0 opacity-40"
@@ -358,7 +358,7 @@ export default function App() {
                     <Heart size={160} fill="currentColor" />
                   </motion.div>
                 </div>
-                
+
                 <div className="flex flex-col md:flex-row items-center justify-center gap-16">
                   <motion.button
                     style={{ scale: yesSize }}
@@ -369,7 +369,7 @@ export default function App() {
                   >
                     YES!
                   </motion.button>
-                  
+
                   <motion.button
                     animate={{ x: noPosition.x, y: noPosition.y }}
                     onMouseEnter={handleNoInteraction}
@@ -390,7 +390,7 @@ export default function App() {
               >
                 <div className="flex justify-center mb-10">
                   <motion.div
-                    animate={{ 
+                    animate={{
                       scale: [1, 1.2, 1],
                       rotate: [0, 5, -5, 0]
                     }}
@@ -407,16 +407,16 @@ export default function App() {
                   <p className="text-2xl text-rose-400 font-light tracking-[0.6em] uppercase">Forever & Always</p>
                 </div>
                 <div className="flex justify-center gap-8 pt-10">
-                   {[1, 2, 3, 4, 5].map(i => (
-                     <motion.div 
-                        key={i}
-                        animate={{ y: [0, -30, 0], scale: [1, 1.2, 1] }}
-                        transition={{ repeat: Infinity, duration: 1, delay: i * 0.15 }}
-                        className="text-rose-600"
-                      >
-                        <Heart fill="currentColor" size={48} />
-                      </motion.div>
-                   ))}
+                  {[1, 2, 3, 4, 5].map(i => (
+                    <motion.div
+                      key={i}
+                      animate={{ y: [0, -30, 0], scale: [1, 1.2, 1] }}
+                      transition={{ repeat: Infinity, duration: 1, delay: i * 0.15 }}
+                      className="text-rose-600"
+                    >
+                      <Heart fill="currentColor" size={48} />
+                    </motion.div>
+                  ))}
                 </div>
               </motion.div>
             )}
